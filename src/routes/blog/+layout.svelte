@@ -2,6 +2,7 @@
 	import { authToken, LoggedInUser } from "../store";
 	import Tags from "../components/Tags.svelte";
 	import { browser } from "$app/environment";
+	import BlogsList from "../components/BlogsList.svelte";
 
 	if (browser) {
 		const token = window.localStorage.getItem("token");
@@ -9,17 +10,23 @@
 	}
 
 	export let data = [];
-	console.log("res from blog layout server: ",data);
+	var dups = [];
+	console.log("res from blog layout page: ", data.tags);
 	// Array to keep track of duplicates
-	var { dups } = filterArrayElements(data.tags);
+	filterArrayElements(data.tags);
+	console.log("dups after filterArrayElements: ", dups);
+
 	var arrStr = dups.join(",");
+	console.log("arrStr: ", arrStr);
 
 	var newArr = arrStr.split(",");
 	var { arr2 } = filterArrayElements2(newArr);
 	var filteredTags = arr2;
 
-	function filterArrayElements(arrItems) {
-		var dups = [];
+	console.log("filteredTags: ", filteredTags);
+	async function filterArrayElements(arrItems) {
+		console.log("tags inside filterArrayElements: ", arrItems);
+		
 		var arr = arrItems.filter(function (el) {
 			// If it is not a duplicate, return true
 			if (dups.indexOf(el.tag) == -1) {
@@ -29,6 +36,7 @@
 
 			return false;
 		});
+		console.log("dups inside filterArrayElements: ", dups);
 		return { dups, arr };
 	}
 	function filterArrayElements2(arrItems) {
@@ -57,20 +65,15 @@
 				{#if $LoggedInUser}
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
 				{/if}
-				<h1>About</h1>
-				<p>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque atque
-					quis adipisci distinctio qui voluptatibus ad illum labore ab! Mollitia
-					autem enim ea laboriosam perspiciatis facere aperiam? Error,
-					voluptates obcaecati.
-				</p>
+				<h1>Blogs:</h1>
+				<BlogsList data={data.titles} />
 			</div>
 			<div class="col-12">
 				<div class="row d-flex">
 					<h3 class="my-4">Tags:</h3>
 					<div>
 						{#each Object.values(filteredTags) as tags}
-							<Tags {tags} />
+							<Tags data={tags} />
 						{/each}
 					</div>
 				</div>

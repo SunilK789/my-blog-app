@@ -1,14 +1,14 @@
 <script>
 	import { browser } from "$app/environment";
-	import { authToken, LoggedInUser } from "../store";
+	import { authToken, LoggedInUser,blogId } from "../store";
 	import Tags from "../components/Tags.svelte";
 
 	export let data;
-	console.log("data from blog page: ",data);
 	if (browser) {
 		const token = window.localStorage.getItem("token");
 		authToken.set(token);
 	}
+	blogId.set(null);
 </script>
 
 {#each Object.values(data.blogs) as blog, i}

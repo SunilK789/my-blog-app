@@ -1,6 +1,6 @@
 <script>
-	export let tags = [];
-	let tagArr = tags.toString().split(",");
+	export let data = [];
+	let tagArr = data.toString().split(",");
 </script>
 
 <!-- svelte-ignore a11y-missing-attribute -->

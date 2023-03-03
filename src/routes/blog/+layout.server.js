@@ -1,9 +1,11 @@
-import { getAllTags } from "../api/services";
+import { getAllTags, getAllTitles } from "../api/services";
 
 export async function load() {
-	const res = await getAllTags();
-	console.log("res from blog layout server: ", res);
+	const tagsResult = await getAllTags();
+	const titlesResult = await getAllTitles();
+	console.log("res from blog layout server: ", tagsResult);
 	return {
-		tags: res.tags,
+		tags: tagsResult.tags,
+		titles: titlesResult,
 	};
 }

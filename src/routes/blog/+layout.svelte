@@ -9,6 +9,7 @@
 	}
 
 	export let data = [];
+	console.log("res from blog layout server: ",data);
 	// Array to keep track of duplicates
 	var { dups } = filterArrayElements(data.tags);
 	var arrStr = dups.join(",");

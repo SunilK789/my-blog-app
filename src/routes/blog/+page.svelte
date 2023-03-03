@@ -4,7 +4,7 @@
 	import Tags from "../components/Tags.svelte";
 
 	export let data;
-
+	console.log("data from blog page: ",data);
 	if (browser) {
 		const token = window.localStorage.getItem("token");
 		authToken.set(token);

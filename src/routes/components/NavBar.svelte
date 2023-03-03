@@ -1,7 +1,7 @@
 <script>
 	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
-	import { authToken, LoggedInUser } from "../store";
+	import { authToken, LoggedInUser, queryStringTags } from "../store";
 
 	var token = "";
 	if (browser) {
@@ -17,6 +17,12 @@
 		}
 
 		goto("/login");
+	};
+
+	const handleBlogLinkClick = () => {
+		console.log("blog link cliked");
+		queryStringTags.set(null);
+		goto("/blog");
 	};
 </script>
 
@@ -42,8 +48,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/about">About</a>
 				</li>
-				<li class="nav-item">
-					<a data-sveltekit-preload-data="off" class="nav-link" href="/blog">Blog</a>
+				<li class="nav-item">					
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
 				</li>
 			</ul>
 			<form class="d-flex">

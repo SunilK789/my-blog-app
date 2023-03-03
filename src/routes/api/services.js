@@ -75,3 +75,18 @@ export const getAllTitles = async () => {
 	const json = await response.json();
 	return json;
 };
+
+export const getAllBlogByTag = async (tag) => {
+	const fullApiPath = `${url}/api/blog/getallbytag/${tag}`;
+
+	const response = await fetch(fullApiPath, {
+		method: "GET", // *GET, POST, PUT, DELETE, etc.
+		headers: {
+			"Content-Type": "application/json",
+			//"auth-token": localStorage.getItem("token"),
+		},
+	});
+
+	const json = await response.json();
+	return json;
+};

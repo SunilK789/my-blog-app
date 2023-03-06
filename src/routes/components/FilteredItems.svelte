@@ -28,7 +28,7 @@
 			<!-- {/if} -->
 		{/each}
 
-		<button class="btn btn-info mx-2 btn-sm my-2" on:click={handleClearButton}>
+		<button class="btn btn-outline-info mx-2 btn-sm my-2" on:click={handleClearButton}>
 			Clear
 		</button>
 	</div>

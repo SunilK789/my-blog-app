@@ -15,11 +15,11 @@
 	filterArrayElements(data.tags);
 	var arrStr = dups.join(",");
 	var newArr = arrStr.split(",");
-	
+
 	var filteredTags = removeDuplicates(newArr);
 	function removeDuplicates(arr) {
-        return [...new Set(arr)];
-    }
+		return [...new Set(arr)];
+	}
 
 	function filterArrayElements(arrItems) {
 		var arr = arrItems.filter(function (el) {
@@ -32,12 +32,12 @@
 			return false;
 		});
 		return { dups, arr };
-	}
+	}	
 </script>
 
 <div class="container">
 	<div class="row">
-		<div class="col-8">			
+		<div class="col-8">
 			<slot />
 		</div>
 		<div class="col-4">
@@ -53,7 +53,7 @@
 					<h3 class="my-4">Tags:</h3>
 					<div>
 						{#each Object.values(filteredTags) as tags}
-							<Tags tags={tags} />
+							<Tags {tags} />
 						{/each}
 					</div>
 				</div>

@@ -26,29 +26,27 @@
 		if ($filteredItemsArray.length === 0) {
 			blogs = allBlogs;
 			filteredData = [];
-		} else {
-			if ($filteredItemsArray.length > 0) {
-				filteredData = [];
-				$filteredItemsArray.forEach((element) => {
-					var PATTERN = element.tag;
-					//console.log("Pattern: ", PATTERN);
-					filteredDataByTag = data.blogs.filter(function (item) {
-						return item.tag.includes(PATTERN);
-					});
-					//console.log("filteredDataByTag: ", filteredDataByTag);
-					//filteredData = [...filteredData, filteredDataByTag];
+		} else if ($filteredItemsArray.length > 0) {
+			filteredData = [];
+			$filteredItemsArray.forEach((element) => {
+				var PATTERN = element.tag;
+				//console.log("Pattern: ", PATTERN);
+				filteredDataByTag = data.blogs.filter(function (item) {
+					return item.tag.includes(PATTERN);
+				});
+				//console.log("filteredDataByTag: ", filteredDataByTag);
+				//filteredData = [...filteredData, filteredDataByTag];
 
-					filteredDataByTag.forEach((element) => {
-						if (!filteredData.some((t) => t === element)) {
-							filteredData.push(element);
-						}
-					});
-
-					//console.log("filteredData final: ", filteredData);
+				filteredDataByTag.forEach((element) => {
+					if (!filteredData.some((t) => t === element)) {
+						filteredData.push(element);
+					}
 				});
 
-				blogs = filteredData;
-			}
+				//console.log("filteredData final: ", filteredData);
+			});
+
+			blogs = filteredData;
 		}
 
 		//console.log("$filteredItemsArray.subscribe", $filteredItemsArray);
@@ -73,7 +71,7 @@
 				{/if}
 			</p>
 			<p><small>by {blog.author}</small></p>
-			<a href="/blog/{blog._id}" class="btn btn-primary">read more...</a>
+			<a href="/blog/{blog._id}" class="btn btn-outline-primary btn-sm">read more...</a>
 
 			<Tags tags={blog.tag} />
 		</div>

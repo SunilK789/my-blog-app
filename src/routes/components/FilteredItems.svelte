@@ -1,18 +1,16 @@
 <script>
 	import { goto } from "$app/navigation";
 	import { queryStringTags, filteredItemsArray, filteredItemsList } from "../store";
-	//export let data = [];
-	//console.log("filteredItemsList FROM filteredItems.svelte: ",filteredItemsList)
-	// let updatedTags = $filteredItemsArray;	
-	// $: filteredArray = removeDuplicates(updatedTags);	
-
-	//let tagArr = updatedTags.toString().split(",");
-	//let tagArr = updatedTags;
-	//console.log("filteredItemsArray form filterdtags: ",$filteredItemsArray)
-	//console.log("tags 123: ",tagArr);
 
 	const handleClearButton = () => {
-		$filteredItemsArray=[];
+		filteredItemsArray.set([]);
+	};
+	
+	const handleRemoveTag =(tag)=>{
+			let removedArr = $filteredItemsArray.filter((x) => x.tag !== tag);
+			//console.log(removedArr);
+			filteredItemsArray.set(removedArr);
+			//console.log("$filteredItemsArray after removed: ",$filteredItemsArray);
 	};
 
 	$: filterArray = $filteredItemsArray;
@@ -24,7 +22,8 @@
 			<!-- {#if arr.length > 0} -->
 			<button class="btn btn-outline-primary mx-2 btn-sm my-2">
 				{arr.tag}
-				<i class="fa-solid fa-rectangle-xmark p-1"></i>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<i class="fa-solid fa-rectangle-xmark p-1" on:click={handleRemoveTag(arr.tag)}></i>
 			</button>
 			<!-- {/if} -->
 		{/each}

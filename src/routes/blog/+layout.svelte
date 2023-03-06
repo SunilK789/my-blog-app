@@ -53,7 +53,7 @@
 					<h3 class="my-4">Tags:</h3>
 					<div>
 						{#each Object.values(filteredTags) as tags}
-							<Tags data={tags} />
+							<Tags tags={tags} />
 						{/each}
 					</div>
 				</div>

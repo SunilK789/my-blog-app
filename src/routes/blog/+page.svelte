@@ -22,19 +22,36 @@
 	}
 	blogId.set(null);
 
-	queryStringTags.subscribe((value) => {
-		currentTag = value;
-		blogs = [];
-		if (currentTag !== null) {
-			var PATTERN = currentTag;
-			filteredData = data.blogs.filter(function (item) {
-				return item.tag.includes(PATTERN);
-			});
-
-			blogs = filteredData;
-		} else {
+	filteredItemsArray.subscribe((value) => {
+		if ($filteredItemsArray.length === 0) {
 			blogs = allBlogs;
+			filteredData = [];
+		} else {
+			if ($filteredItemsArray.length > 0) {
+				filteredData = [];
+				$filteredItemsArray.forEach((element) => {
+					var PATTERN = element.tag;
+					//console.log("Pattern: ", PATTERN);
+					filteredDataByTag = data.blogs.filter(function (item) {
+						return item.tag.includes(PATTERN);
+					});
+					//console.log("filteredDataByTag: ", filteredDataByTag);
+					//filteredData = [...filteredData, filteredDataByTag];
+
+					filteredDataByTag.forEach((element) => {
+						if (!filteredData.some((t) => t === element)) {
+							filteredData.push(element);
+						}
+					});
+
+					//console.log("filteredData final: ", filteredData);
+				});
+
+				blogs = filteredData;
+			}
 		}
+
+		//console.log("$filteredItemsArray.subscribe", $filteredItemsArray);
 	});
 
 	$: blogItems = blogs;
@@ -58,7 +75,7 @@
 			<p><small>by {blog.author}</small></p>
 			<a href="/blog/{blog._id}" class="btn btn-primary">read more...</a>
 
-			<Tags data={blog.tag} />
+			<Tags tags={blog.tag} />
 		</div>
 	</div>
 {/each}

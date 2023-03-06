@@ -1,15 +1,14 @@
 <script>
 	import { goto } from "$app/navigation";
 	import {
-		queryStringTags,
 		filteredItemsArray,
-		filteredItemsList,
 	} from "../store";
-	export let data = [];
-	let updatedTags = data;
+	export let tags =[];
+	let updatedTags = tags;
 
 	const handleTagsClick = (tag) => {
 		updatedTags = "";
+		tags=[];
 		
 		if (!($filteredItemsArray.some((t) => t.tag === tag))) {
 			$filteredItemsArray = [
@@ -21,16 +20,17 @@
 		}
 		
 		goto(`/blog`);
-		queryStringTags.set(tag);
 	};
 
 	let tagArr = updatedTags.toString().split(",");
+	console.log("updated tags: ",updatedTags);
+	updatedTags="";
 </script>
 
 {#each tagArr as arr}
 	<button
 		class="btn btn-secondary mx-2 btn-sm my-2"
-		on:click={async () => await handleTagsClick(arr.trim())}
+		on:click={async () => handleTagsClick(arr.trim())}
 	>
 		{arr.trim()}
 	</button>

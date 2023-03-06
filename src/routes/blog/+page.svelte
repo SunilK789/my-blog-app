@@ -1,12 +1,20 @@
 <script>
 	import { browser } from "$app/environment";
-	import { authToken, blogId, queryStringTags } from "../store";
+	import {
+		authToken,
+		blogId,
+		queryStringTags,
+		filteredItemsArray,
+	} from "../store";
 	import Tags from "../components/Tags.svelte";
-	
+	import FilteredItems from "../components/FilteredItems.svelte";
+
 	export let data;
 	let blogs = data.blogs;
 	let allBlogs = data.blogs;
 	let currentTag = "";
+	let filteredData = [];
+
 	if (browser) {
 		const token = window.localStorage.getItem("token");
 		authToken.set(token);
@@ -15,20 +23,23 @@
 
 	queryStringTags.subscribe((value) => {
 		currentTag = value;
+		blogs = [];
 		if (currentTag !== null) {
 			var PATTERN = currentTag;
-			const filteredData = data.blogs.filter(function (item) {
+			filteredData = data.blogs.filter(function (item) {
 				return item.tag.includes(PATTERN);
 			});
 
-			blogs = [...filteredData];
-			console.log("filterd blogs: ", blogs);
+			blogs = filteredData;
 		} else {
 			blogs = allBlogs;
-			console.log("if tag === null, blogs: ", blogs);
 		}
 	});
 </script>
+
+{#if $filteredItemsArray.length > 0}
+	<FilteredItems />
+{/if}
 
 {#each Object.values(blogs) as blog, i}
 	<div class="card my-4">
@@ -41,7 +52,7 @@
 					{blog.description}
 				{/if}
 			</p>
-			<p>by {blog.author}</p>
+			<p><small>by {blog.author}</small></p>
 			<a href="/blog/{blog._id}" class="btn btn-primary">read more...</a>
 
 			<Tags data={blog.tag} />

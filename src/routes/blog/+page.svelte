@@ -14,6 +14,7 @@
 	let allBlogs = data.blogs;
 	let currentTag = "";
 	let filteredData = [];
+	let filteredDataByTag = [];
 
 	if (browser) {
 		const token = window.localStorage.getItem("token");
@@ -35,13 +36,15 @@
 			blogs = allBlogs;
 		}
 	});
+
+	$: blogItems = blogs;
 </script>
 
 {#if $filteredItemsArray.length > 0}
 	<FilteredItems />
 {/if}
 
-{#each Object.values(blogs) as blog, i}
+{#each Object.values(blogItems) as blog, i}
 	<div class="card my-4">
 		<div class="card-header"><strong>{blog.title}</strong></div>
 		<div class="card-body">

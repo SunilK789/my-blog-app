@@ -15,10 +15,6 @@
 		$filteredItemsArray=[];
 	};
 
-	function removeDuplicates(arr) {
-        return [...new Set(arr)];
-    } 
-
 	$: filterArray = $filteredItemsArray;
 </script>
 
@@ -26,8 +22,9 @@
 	<div class="card-header">
 		{#each filterArray as arr}
 			<!-- {#if arr.length > 0} -->
-			<button class="btn btn-secondary mx-2 btn-sm my-2">
+			<button class="btn btn-outline-primary mx-2 btn-sm my-2">
 				{arr.tag}
+				<i class="fa-solid fa-rectangle-xmark p-1"></i>
 			</button>
 			<!-- {/if} -->
 		{/each}

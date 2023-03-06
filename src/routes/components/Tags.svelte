@@ -15,6 +15,10 @@
 					tag,
 				},
 			];
+		}else{
+			let removedArr = $filteredItemsArray.filter((x) => x.tag !== tag);
+			//console.log(removedArr);
+			filteredItemsArray.set(removedArr);
 		}
 
 		goto(`/blog`);

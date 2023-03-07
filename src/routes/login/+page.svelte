@@ -1,24 +1,6 @@
 <script>
-	import { browser } from "$app/environment";
-	import { userLogin } from "../api/auth";
-	import { authToken } from "../store";
-	import { goto } from "$app/navigation";
-	import { cookies } from "cookie";
-
 	let email = "";
 	let password = "";
-
-	const handleLogin = async () => {
-		var token = await userLogin(email, password);
-		console.log("Token: ", token.authToken);
-		authToken.set(token.authToken);
-
-		if (browser) {
-			window.localStorage.setItem("token", token.authToken);
-		}
-
-		goto("/blog");
-	};
 </script>
 
 <div class="container my-5">
@@ -27,7 +9,7 @@
 			<div
 				class="card bg-dark text-white border border-secondary border-1 rounded p-5"
 			>
-				<form>
+				<form method="POST" action="?/login">
 					<h1 class="text-center">Login</h1>
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">
@@ -36,7 +18,8 @@
 						<input
 							type="email"
 							class="form-control"
-							id="exampleInputEmail1"
+							id="email"
+							name="email"
 							aria-describedby="emailHelp"
 							required
 							bind:value={email}
@@ -52,7 +35,8 @@
 						<input
 							type="password"
 							class="form-control"
-							id="exampleInputPassword1"
+							id="password"
+							name="password"
 							required
 							bind:value={password}
 						/>
@@ -62,7 +46,7 @@
 							type="submit"
 							class="btn btn-primary mx-2"
 							disabled={email.length < 5 || password.length < 5}
-							on:click={handleLogin}
+							
 						>
 							Login
 						</button>

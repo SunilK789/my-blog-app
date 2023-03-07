@@ -1,6 +1,7 @@
 <script>
 	import { addblog } from "../../api/services";
 
+	export let data;
 	let title = "";
 	let description = "";
 	let author = "";
@@ -14,7 +15,11 @@
 	};
 
 	const handleSaveButton = async () => {
-		const res = await addblog(author, title, description, tag);
+		const token = data.token;
+
+	console.log("token from cookies add blog: ",token);
+
+		const res = await addblog(author, title, description, tag,token);
 		if (res.success) {
 			console.log("Blog added successfully!");
 			alert("Blog added successfully!");

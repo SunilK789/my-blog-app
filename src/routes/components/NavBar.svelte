@@ -1,29 +1,24 @@
 <script>
 	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
-	import { authToken, LoggedInUser, queryStringTags } from "../store";
+	import { authToken, LoggedInUser } from "../store";
 
-	var token = "";
-	if (browser) {
-		token = window.localStorage.getItem("token");
-		authToken.set(token);
-	}
-
-	const handleLogout = () => {
+	const handleLogout = ({cookies}) => {
 		if (browser) {
 			window.localStorage.clear();
 			token = window.localStorage.getItem("token");
 			authToken.set(token);
+			cookies.delete("token");
 		}
 
 		goto("/login");
 	};
 
 	const handleBlogLinkClick = () => {
-		console.log("blog link cliked");
-		queryStringTags.set(null);
 		goto("/blog");
 	};
+
+	$: loggedInUser = $LoggedInUser;
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -52,6 +47,10 @@
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
 				</li>
+				<li class="nav-item">					
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a class="nav-link" href="/blog/myblogs">My Blogs</a>
+				</li>
 			</ul>
 			<form class="d-flex">
 				<input
@@ -62,7 +61,7 @@
 				/>
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
-			{#if !$LoggedInUser}
+			{#if !loggedInUser}
 				<a class="btn btn-primary mx-2" href="/login">Login</a>
 				<a class="btn btn-primary" href="/signup">Sign Up</a>
 			{:else}

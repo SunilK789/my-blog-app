@@ -1,5 +1,7 @@
-const url = "http://localhost:3000";
+import { browser } from "$app/environment";
 
+const url = "http://localhost:3000";
+let authToken ="";
 export const getAllBlogs = async () => {
 	const fullApiPath = `${url}/api/blog/getallblogs`;
 
@@ -14,6 +16,22 @@ export const getAllBlogs = async () => {
 	const json = await response.json();
 	return json;
 };
+export const getAllBlogsByUser = async (token) => {
+	const fullApiPath = `${url}/api/blog/getuserblogs`;
+	console.log("authToken api: ",token);
+	
+	const response = await fetch(fullApiPath, {
+		method: "GET", // *GET, POST, PUT, DELETE, etc.
+		headers: {
+			"Content-Type": "application/json",
+			"auth-token": token,
+		},
+	});
+
+	const json = await response.json();
+	return json;
+};
+
 
 export const getAllBlogById = async (id) => {
 	const fullApiPath = `${url}/api/blog/getblogbyid/${id}`;
@@ -30,14 +48,14 @@ export const getAllBlogById = async (id) => {
 	return json;
 };
 
-export const addblog = async (author, title, description, tag) => {
+export const addblog = async (author, title, description, tag,token) => {
 	const fullApiPath = `${url}/api/blog/addblog`;
 
 	const response = await fetch(fullApiPath, {
 		method: "POST", // *GET, POST, PUT, DELETE, etc.
 		headers: {
 			"Content-Type": "application/json",
-			//"auth-token": localStorage.getItem("token"),
+			"auth-token": token,
 		},
 		body: JSON.stringify({ author, title, description, tag }),
 	});

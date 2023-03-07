@@ -4,12 +4,13 @@
 		authToken,
 		blogId,		
 		filteredItemsArray,
-	} from "../store";
-	import Tags from "../components/Tags.svelte";
-	import FilteredItems from "../components/FilteredItems.svelte";
+	} from "../../store";
+	import Tags from "../../components/Tags.svelte";
+	import FilteredItems from "../../components/FilteredItems.svelte";
 
-	export let data;
+	export let data=[];
 	let blogs = data.blogs;
+    console.log("data for my blogs: ",blogs);
 	let allBlogs = data.blogs;
 	let filteredData = [];
 	let filteredDataByTag = [];
@@ -45,14 +46,14 @@
 		}
 	});
 
-	$: blogItems = blogs;
+	$: blogItems2 = blogs;
 </script>
 
 {#if $filteredItemsArray.length > 0}
 	<FilteredItems />
 {/if}
 
-{#each Object.values(blogItems) as blog, i}
+{#each Object.values(blogItems2) as blog, i}
 	<div class="card my-4">
 		<div class="card-header"><strong>{blog.title}</strong></div>
 		<div class="card-body">

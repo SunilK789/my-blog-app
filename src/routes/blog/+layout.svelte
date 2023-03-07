@@ -3,13 +3,10 @@
 	import Tags from "../components/Tags.svelte";
 	import { browser } from "$app/environment";
 	import BlogsList from "../components/BlogsList.svelte";
-
-	if (browser) {
-		const token = window.localStorage.getItem("token");
-		authToken.set(token);
-	}
-
+	
 	export let data = [];
+	const loggedInUser = data.authToken;
+	authToken.set(data.authToken);
 	var dups = [];
 	// Array to keep track of duplicates
 	filterArrayElements(data.tags);
@@ -42,7 +39,7 @@
 		</div>
 		<div class="col-4">
 			<div class="border-blue my-4">
-				{#if $LoggedInUser}
+				{#if loggedInUser}
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
 				{/if}
 				<h3>Blogs:</h3>

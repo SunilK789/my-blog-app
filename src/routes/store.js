@@ -6,7 +6,8 @@ export const LoggedInUser = derived(authToken, ($authToken) => $authToken);
 export const blogId = writable();
 export const currentBlogId = derived(blogId, ($blogId) => $blogId);
 
-export const queryStringTags = writable();
+
 export const filteredItemsArray = writable([]);
 export const filteredItemsList = derived(filteredItemsArray, ($filteredItemsArray) => $filteredItemsArray);
+
 

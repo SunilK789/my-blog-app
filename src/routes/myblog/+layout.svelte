@@ -39,20 +39,20 @@
 		</div>
 		<div class="col-4">
 			<div class="border-blue my-4">
-				<!-- {#if loggedInUser}
+				{#if loggedInUser}
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
-				{/if} -->
+				{/if}
 				<h3>Blogs:</h3>
-				<BlogsList data={data.titles} />
+				<BlogsList myblog={true} data={data.titles} />
 			</div>
 			<div class="col-12">
 				<div class="row d-flex">
-					<h3 class="my-4">Tags:</h3>
+					<!-- <h3 class="my-4">Tags:</h3>
 					<div>
 						{#each Object.values(filteredTags) as tags}
 							<Tags {tags} />
 						{/each}
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

@@ -2,12 +2,15 @@
 	import { blogId, currentBlogId } from "../store";
 
 	export let data;
+	export let myblog;
+
+	const link = myblog ? "/myblog/": "/blog/";
 </script>
 
 <div class="list-group">
 	{#each Object.values(data.titles) as title}
 		<a
-			href="/blog/{title._id}"
+			href="{link}{title._id}"
 			class="list-group-item list-group-item-action  {$currentBlogId ===
 			title._id
 				? 'active'

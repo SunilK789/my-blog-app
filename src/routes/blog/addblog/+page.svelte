@@ -81,7 +81,7 @@
 			>
 				Save
 			</button>
-			<a href="/blog" class="btn btn-secondary mx-2">Cancel</a>
+			<a href="/myblog" class="btn btn-secondary mx-2">Cancel</a>
 			<button class="btn btn-info mx-2" on:click={handleClearButton}>
 				Clear
 			</button>

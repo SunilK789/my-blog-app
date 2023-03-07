@@ -49,7 +49,7 @@
 				</li>
 				<li class="nav-item">					
 					<!-- svelte-ignore a11y-invalid-attribute -->
-					<a class="nav-link" href="/blog/myblogs">My Blogs</a>
+					<a class="nav-link" href="/myblog">My Blogs</a>
 				</li>
 			</ul>
 			<form class="d-flex">

@@ -1,10 +1,14 @@
 <script>
-	import { authToken, LoggedInUser } from "../store";
+	import { authToken, LoggedInUser,storedBlogs, storedBlogsList } from "../store";
 	import BlogsList from "../components/BlogsList.svelte";
 	
 	export let data = [];
 	const loggedInUser = data.authToken;
 	authToken.set(data.authToken);
+	storedBlogs.set(data.blogs);
+
+	let blogItems = data.blogs;
+
 	var dups = [];
 	// Array to keep track of duplicates
 	filterArrayElements(data.tags);
@@ -28,6 +32,12 @@
 		});
 		return { dups, arr };
 	}	
+
+	storedBlogs.subscribe((value)=>{
+			blogItems = $storedBlogsList;
+	})
+	
+	$: blogs = blogItems;
 </script>
 
 <div class="container">
@@ -41,7 +51,7 @@
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
 				{/if}
 				<h3>Blogs:</h3>
-				<BlogsList myblog={true} data={data.titles} />
+				<BlogsList myblog={true} data={blogs} />
 			</div>
 			<div class="col-12">
 				<div class="row d-flex">

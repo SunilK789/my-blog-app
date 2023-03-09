@@ -109,15 +109,31 @@ export const getAllBlogByTag = async (tag) => {
 	return json;
 };
 
-export const deleteBlogByTag = async (id,tag) => {
+export const deleteBlogById = async (id,token) => {
 	const fullApiPath = `${url}/api/blog/deleteblog/${id}`;
 
 	const response = await fetch(fullApiPath, {
 		method: "DELETE", // *GET, POST, PUT, DELETE, etc.
 		headers: {
 			"Content-Type": "application/json",
-			"auth-token": tag
+			"auth-token": token
 		},
+	});
+
+	const json = await response.json();
+	return json;
+};
+
+export const editBlogById = async (id, title, description, author, tag,token) => {
+	const fullApiPath = `${url}/api/blog/updateblog/${id}`;
+
+	const response = await fetch(fullApiPath, {
+		method: "PUT", // *GET, POST, PUT, DELETE, etc.
+		headers: {
+			"Content-Type": "application/json",
+			"auth-token": token
+		},
+		body: JSON.stringify({ title, description,author, tag }),
 	});
 
 	const json = await response.json();

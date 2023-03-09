@@ -1,14 +1,14 @@
 <script>
 	import { browser } from "$app/environment";
-	import { authToken, blogId, filteredItemsArray } from "../store";
+	import { authToken, blogId, filteredItemsArray,storedBlogs } from "../store";
 	import Tags from "../components/Tags.svelte";
 	import FilteredItems from "../components/FilteredItems.svelte";
-  import { deleteBlogByTag } from "../api/services";
+  	import { deleteBlogById } from "../api/services";
+	import { goto } from '$app/navigation';
 
 	export let data = [];
-	let blogs = data.blogs;
-	console.log("data for my blogs: ", blogs);
-	let allBlogs = data.blogs;
+	let blogs = $storedBlogs;//data.blogs;
+	let allBlogs = $storedBlogs;//data.blogs;
 	let filteredData = [];
 	let filteredDataByTag = [];
 
@@ -18,35 +18,38 @@
 	}
 	blogId.set(null);
 
-	filteredItemsArray.subscribe((value) => {
-		filteredData = [];
-		if ($filteredItemsArray.length === 0) {
-			blogs = allBlogs;
-		} else if ($filteredItemsArray.length > 0) {
-			$filteredItemsArray.forEach((element) => {
-				var PATTERN = element.tag;
-				filteredDataByTag = data.blogs.filter(function (item) {
-					return item.tag.includes(PATTERN);
-				});
+	// filteredItemsArray.subscribe((value) => {
+	// 	filteredData = [];
+	// 	if ($filteredItemsArray.length === 0) {
+	// 		blogs = allBlogs;
+	// 	} else if ($filteredItemsArray.length > 0) {
+	// 		$filteredItemsArray.forEach((element) => {
+	// 			var PATTERN = element.tag;
+	// 			filteredDataByTag = data.blogs.filter(function (item) {
+	// 				return item.tag.includes(PATTERN);
+	// 			});
 
-				filteredDataByTag.forEach((element) => {
-					if (!filteredData.some((t) => t === element)) {
-						filteredData.push(element);
-					}
-				});
-			});
+	// 			filteredDataByTag.forEach((element) => {
+	// 				if (!filteredData.some((t) => t === element)) {
+	// 					filteredData.push(element);
+	// 				}
+	// 			});
+	// 		});
 
-			blogs = filteredData;
-		}
-	});
+	// 		blogs = filteredData;
+	// 	}
+	// });
+
+	
 
 	 const handleDeleteBlog = async (id) => {
-		console.log("id to delete: ",id);
-		const res = await deleteBlogByTag(id,data.token);
-		console.log("after delete response : ",res);
+		const res = await deleteBlogById(id,data.token);
 		const blogsAfterDelete = blogs.filter((blog)=>blog._id !== id);
-		console.log("blogsAfterDelete: ",blogsAfterDelete);
-		blogs = blogsAfterDelete;
+		storedBlogs.set(blogsAfterDelete);
+		//blogs = blogsAfterDelete;
+	};
+	const handleEditBlog = async (id) => {
+		goto(`/myblog/edit/${id}`);
 	};
 
 	$: blogItems = blogs;
@@ -62,7 +65,10 @@
 			<div class="flex-grow-1">
 				<strong>{blog.title}</strong>
 			</div>
-			<div class=""><i class="fa-solid fa-pen-to-square mx-4" role="button"></i>
+			
+			<div>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<i class="fa-solid fa-pen-to-square mx-4" role="button" on:click={handleEditBlog(blog._id)}></i>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<i class="fa-solid fa-trash" role="button" on:click={handleDeleteBlog(blog._id)} /></div>
 		</div>

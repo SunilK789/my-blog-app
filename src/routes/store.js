@@ -10,4 +10,7 @@ export const currentBlogId = derived(blogId, ($blogId) => $blogId);
 export const filteredItemsArray = writable([]);
 export const filteredItemsList = derived(filteredItemsArray, ($filteredItemsArray) => $filteredItemsArray);
 
+export const storedBlogs = writable([]);
+export const storedBlogsList = derived(storedBlogs, ($storedBlogs) => $storedBlogs);
+
 

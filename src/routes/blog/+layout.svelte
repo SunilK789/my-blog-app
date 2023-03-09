@@ -43,7 +43,7 @@
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
 				{/if} -->
 				<h3>Blogs:</h3>
-				<BlogsList data={data.titles} />
+				<BlogsList mybog={false} data={data.titles} />
 			</div>
 			<div class="col-12">
 				<div class="row d-flex">

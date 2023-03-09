@@ -11,7 +11,7 @@ export async function load({cookies}) {
 	
 	return {
 		tags: tagsResult.tags,
-		titles: titlesResult,
+		titles: titlesResult.titles,
 		authToken: token
 	};
 }

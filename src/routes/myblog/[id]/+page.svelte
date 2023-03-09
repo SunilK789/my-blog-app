@@ -9,7 +9,7 @@
 
 	const handleBackButton = () => {
 		blogId.set(null);
-		goto("/blog");
+		goto("/myblog");
 	};
 </script>
 

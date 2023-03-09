@@ -1,7 +1,5 @@
 <script>
 	import { authToken, LoggedInUser } from "../store";
-	import Tags from "../components/Tags.svelte";
-	import { browser } from "$app/environment";
 	import BlogsList from "../components/BlogsList.svelte";
 	
 	export let data = [];

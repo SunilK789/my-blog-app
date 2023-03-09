@@ -8,7 +8,7 @@
 </script>
 
 <div class="list-group">
-	{#each Object.values(data.titles) as title}
+	{#each Object.values(data) as title}
 		<a
 			href="{link}{title._id}"
 			class="list-group-item list-group-item-action  {$currentBlogId ===

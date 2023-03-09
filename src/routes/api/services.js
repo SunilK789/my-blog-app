@@ -108,3 +108,18 @@ export const getAllBlogByTag = async (tag) => {
 	const json = await response.json();
 	return json;
 };
+
+export const deleteBlogByTag = async (id,tag) => {
+	const fullApiPath = `${url}/api/blog/deleteblog/${id}`;
+
+	const response = await fetch(fullApiPath, {
+		method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+		headers: {
+			"Content-Type": "application/json",
+			"auth-token": tag
+		},
+	});
+
+	const json = await response.json();
+	return json;
+};

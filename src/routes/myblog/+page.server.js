@@ -6,5 +6,6 @@ export async function load({cookies}) {
 	const res = await getAllBlogsByUser(token);
 	return {
 		blogs: res.blogs,
+		token: token
 	};
 }

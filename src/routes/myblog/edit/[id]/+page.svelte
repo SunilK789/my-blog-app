@@ -21,22 +21,16 @@
 	const handleSaveButton = async () => {
 		const token = data.token;
 
-		const res = await editBlogById(id, title, description, tag,author, token);
+		const res = await editBlogById(id, title, description, author,tag, token);
 		console.log("res after update: ",res);
 		if (res.success) {
 
 			let blogs = $storedBlogs;
 			for (let index = 0; index < blogs.length; index++) {
-				//const element = blogs[index];
-				console.log("blogs[index]._id: ",blogs[index]._id);
-				console.log("res._id: ",res.blog._id);
 				if(blogs[index]._id === res.blog._id)
 				{
 
 					blogs[index].title = res.blog.title,
-					console.log("blogs[index].title: ",blogs[index].title);
-					console.log("res.title: ",res.blog.title);
-
 					blogs[index].description = res.blog.description,
 					blogs[index].tag = res.blog.tag,
 					blogs[index].author = res.blog.author
@@ -44,19 +38,13 @@
 				}
 				
 			}
-			console.log("blogs after update: ",blogs);
-
 			storedBlogs.set(blogs);
-
-			console.log("storedBlogs after update: ",$storedBlogs);
-
-			console.log("Blog edited successfully!");			
 			goto(`/myblog/${id}`)
 		}
 	};
 </script>
 
-<div class="container">
+<div class="container my-4">
 	<form type="submit">
 		<div class="mb-3">
 			<label for="title" class="form-label">Title</label>

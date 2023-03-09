@@ -1,8 +1,10 @@
 import { getAllBlogById } from "../../api/services";
 
-export async function load({ params }) {
+export async function load({ cookies, params }) {
+	const token = cookies.get('token');
 	const res = await getAllBlogById(params.id);
 	return {
 		blog: res,
+		token: token
 	};
 }

@@ -1,16 +1,19 @@
 <script>
 	import { browser } from "$app/environment";
-	import { authToken, blogId, filteredItemsArray,storedBlogs } from "../store";
+	import {
+		authToken,
+		blogId,
+		filteredItemsArray,
+		storedBlogs,
+		storedBlogsList,
+	} from "../store";
 	import Tags from "../components/Tags.svelte";
 	import FilteredItems from "../components/FilteredItems.svelte";
-  	import { deleteBlogById } from "../api/services";
-	import { goto } from '$app/navigation';
+	import { deleteBlogById } from "../api/services";
+	import { goto } from "$app/navigation";
 
 	export let data = [];
-	let blogs = $storedBlogs;//data.blogs;
-	let allBlogs = $storedBlogs;//data.blogs;
-	let filteredData = [];
-	let filteredDataByTag = [];
+	let blogs = $storedBlogsList; //data.blogs;
 
 	if (browser) {
 		const token = window.localStorage.getItem("token");
@@ -18,35 +21,16 @@
 	}
 	blogId.set(null);
 
-	// filteredItemsArray.subscribe((value) => {
-	// 	filteredData = [];
-	// 	if ($filteredItemsArray.length === 0) {
-	// 		blogs = allBlogs;
-	// 	} else if ($filteredItemsArray.length > 0) {
-	// 		$filteredItemsArray.forEach((element) => {
-	// 			var PATTERN = element.tag;
-	// 			filteredDataByTag = data.blogs.filter(function (item) {
-	// 				return item.tag.includes(PATTERN);
-	// 			});
-
-	// 			filteredDataByTag.forEach((element) => {
-	// 				if (!filteredData.some((t) => t === element)) {
-	// 					filteredData.push(element);
-	// 				}
-	// 			});
-	// 		});
-
-	// 		blogs = filteredData;
-	// 	}
-	// });
-
-	
-
-	 const handleDeleteBlog = async (id) => {
-		const res = await deleteBlogById(id,data.token);
-		const blogsAfterDelete = blogs.filter((blog)=>blog._id !== id);
-		storedBlogs.set(blogsAfterDelete);
-		//blogs = blogsAfterDelete;
+	const handleDeleteBlog = async (id) => {
+		const res = await deleteBlogById(id, data.token);
+		if (res.success) {
+			const blogsAfterDelete = blogs.filter((blog) => blog._id !== id);
+			storedBlogs.set(blogsAfterDelete);
+			blogs = $storedBlogsList;
+		}
+		else{
+			alert(res.message);
+		}
 	};
 	const handleEditBlog = async (id) => {
 		goto(`/myblog/edit/${id}`);
@@ -65,12 +49,21 @@
 			<div class="flex-grow-1">
 				<strong>{blog.title}</strong>
 			</div>
-			
+
 			<div>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<i class="fa-solid fa-pen-to-square mx-4" role="button" on:click={handleEditBlog(blog._id)}></i>
+				<i
+					class="fa-solid fa-pen-to-square mx-4"
+					role="button"
+					on:click={handleEditBlog(blog._id)}
+				/>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<i class="fa-solid fa-trash" role="button" on:click={handleDeleteBlog(blog._id)} /></div>
+				<i
+					class="fa-solid fa-trash"
+					role="button"
+					on:click={handleDeleteBlog(blog._id)}
+				/>
+			</div>
 		</div>
 		<div class="card-body">
 			<p class="card-text">
@@ -85,9 +78,7 @@
 				read more...
 			</a>
 
-			<Tags tags={blog.tag} />
+			<Tags myblog={true} tags={blog.tag} />
 		</div>
 	</div>
 {/each}
-
-

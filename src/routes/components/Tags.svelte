@@ -4,6 +4,7 @@
 	import { goto } from "$app/navigation";
 	import { filteredItemsArray } from "../store";
 	export let tags = [];
+	export let myblog;
 	//let updatedTags = tags;
 	let tagArr = [];
 	onMount(async () => {
@@ -45,6 +46,7 @@
 			? 'active'
 			: ''}"
 		on:click={async () => handleTagsClick(arr.trim())}
+		disabled ={myblog}
 	>
 		{arr.trim()}
 	</button>

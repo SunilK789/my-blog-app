@@ -33,11 +33,12 @@
 		return { dups, arr };
 	}	
 
-	storedBlogs.subscribe((value)=>{
+	storedBlogs.subscribe((value)=>{		
 			blogItems = $storedBlogsList;
+			console.log("storedBlogs.subscribe on layout.svelte: ", $storedBlogsList);
 	})
 	
-	$: blogs = blogItems;
+	$: blogs = $storedBlogsList;
 </script>
 
 <div class="container">

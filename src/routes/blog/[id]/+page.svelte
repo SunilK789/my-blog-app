@@ -12,7 +12,8 @@
 		goto("/blog");
 	};
 </script>
-
+<div class="pt-5">
+	<div class="my-5">
 <div class="container">
 	<div class="my-3">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -30,6 +31,7 @@
 			</p>
 		</div>
 	</div>
+</div></div>
 </div>
 
 <style>

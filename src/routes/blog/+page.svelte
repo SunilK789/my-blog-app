@@ -1,8 +1,9 @@
 <script>
-	import { browser } from "$app/environment";
-	import { authToken, blogId, filteredItemsArray } from "../store";
+	
+	import { blogId, filteredItemsArray } from "../store";
 	import Tags from "../components/Tags.svelte";
 	import FilteredItems from "../components/FilteredItems.svelte";
+	import { mode, currentMode } from "$lib/stores/modeStore";
 
 	export let data;
 	let blogs = data.blogs;

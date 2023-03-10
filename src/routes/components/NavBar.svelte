@@ -1,15 +1,29 @@
 <script>
 	import { goto } from "$app/navigation";
 	import { authToken, LoggedInUser } from "../store";
-	
+	import { mode, currentMode } from "$lib/stores/modeStore";
+
 	let isLoggedInUser = false;
-	
+
+	const handleModes = () => {
+		
+		if ($currentMode === "undefined") {
+			mode.set("dark");
+			console.log("current mode: ",$currentMode)
+		} else if ($currentMode === "dark"){
+			mode.set("light");
+			console.log("current mode: ",$currentMode)
+		}else{
+			mode.set("dark");
+			console.log("current mode: ",$currentMode)
+		}
+	};
 	const handleBlogLinkClick = () => {
 		goto("/blog");
 	};
 
-	authToken.subscribe((value) => {	
-		//console.log("loggedinuser from subscribe navbar - value: ", value);	
+	authToken.subscribe((value) => {
+		//console.log("loggedinuser from subscribe navbar - value: ", value);
 		if (value) {
 			isLoggedInUser = true;
 			//console.log("loggedinuser from subscribe navbar isLoggedInUser: ", isLoggedInUser);
@@ -22,7 +36,7 @@
 	$: loggedInUser = isLoggedInUser;
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-{$currentMode} fixed-top">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/blog">Blogs 4 you</a>
 		<button
@@ -49,15 +63,15 @@
 					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
 				</li>
 				{#if loggedInUser}
-				<li class="nav-item">
-					<!-- svelte-ignore a11y-invalid-attribute -->
-					<a class="nav-link" href="/myblog">My Blogs</a>
-				</li>
+					<li class="nav-item">
+						<!-- svelte-ignore a11y-invalid-attribute -->
+						<a class="nav-link" href="/myblog">My Blogs</a>
+					</li>
 				{/if}
 			</ul>
 			<form class="d-flex">
 				<input
-					class="form-control me-2"
+					class="form-control me-2 btn-sm"
 					type="search"
 					placeholder="Search"
 					aria-label="Search"
@@ -65,13 +79,24 @@
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 			{#if !loggedInUser}
-				<a class="btn btn-primary mx-2" href="/login">Login</a>
-				<a class="btn btn-primary" href="/signup">Sign Up</a>
+				<a class="btn btn-primary btn-sm mx-2" href="/login">Login</a>
+				<a class="btn btn-primary btn-sm" href="/signup">Sign Up</a>
 			{:else}
-				<a class="btn btn-primary mx-2" href="/logout" >
-					Logout
-				</a>
+				<a class="btn btn-primary mx-2" href="/logout">Logout</a>
 			{/if}
+			<div class="form-check form-switch mx-2">
+				<input
+					class="form-check-input"
+					type="checkbox"
+					role="switch"
+					id="flexSwitchCheckDefault"
+					
+					on:click={handleModes}
+				/>
+				<label class="form-check-label" for="flexSwitchCheckDefault">
+					Modes(Light/Dark)
+				</label>
+			</div>
 		</div>
 	</div>
 </nav>

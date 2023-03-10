@@ -3,6 +3,7 @@
 	import Tags from "../components/Tags.svelte";
 	import { browser } from "$app/environment";
 	import BlogsList from "../components/BlogsList.svelte";
+	import { mode, currentMode } from "$lib/stores/modeStore";
 	
 	export let data = [];
 	const loggedInUser = data.authToken;
@@ -32,7 +33,7 @@
 	}	
 </script>
 
-<div class="container">
+<div class="container bg-{$currentMode}">
 	<div class="row">
 		<div class="col-8">
 			<slot />

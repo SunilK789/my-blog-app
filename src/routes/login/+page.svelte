@@ -3,7 +3,9 @@
 	let password = "";
 </script>
 
-<div class="container my-5">
+<div class="pt-5">
+	<div class="my-5">
+<div class="container">
 	<div class="row d-flex justify-content-center align-items-center">
 		<div class="col-12 col-md-8 col-lg-6 col-xl-5">
 			<div
@@ -57,4 +59,5 @@
 		</div>
 		<!-- <div class="col-4" /> -->
 	</div>
+</div></div>
 </div>

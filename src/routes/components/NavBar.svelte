@@ -24,7 +24,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/">Blogs 4 you</a>
+		<a class="navbar-brand" href="/blog">Blogs 4 you</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -38,9 +38,9 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="/">Home</a>
-				</li>
+				</li> -->
 				<li class="nav-item">
 					<a class="nav-link" href="/about">About</a>
 				</li>
@@ -48,10 +48,12 @@
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
 				</li>
+				{#if loggedInUser}
 				<li class="nav-item">
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a class="nav-link" href="/myblog">My Blogs</a>
 				</li>
+				{/if}
 			</ul>
 			<form class="d-flex">
 				<input

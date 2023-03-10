@@ -16,6 +16,19 @@
 
 <div>
    {#if !isLoggedInUser }
-   <span>Logout successfull!</span>
+   <div class="container text-center">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>Logout Success!</h1>             
+              
+                <div class="error-actions">
+                    <a href="/blog" class="btn btn-primary my-4"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
    {/if}
 </div>

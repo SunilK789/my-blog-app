@@ -29,6 +29,8 @@
 </script>
 
 <div class="container">
+	<div class="pt-5">
+		<div class="my-5">
 	<form type="submit">
 		<div class="mb-3">
 			<label for="title" class="form-label">Title</label>
@@ -86,5 +88,5 @@
 				Clear
 			</button>
 		</div>
-	</form>
+	</form></div></div>
 </div>

@@ -51,21 +51,23 @@
 			<slot />
 		</div>
 		<div class="col-4">
-			<div class="border-blue my-4">
-				{#if loggedInUser}
-					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
-				{/if}
-				<h3>Blogs:</h3>
-				<BlogsList myblog={true} data={blogs} />
-			</div>
-			<div class="col-12">
-				<div class="row d-flex">
-					<!-- <h3 class="my-4">Tags:</h3>
-					<div>
-						{#each Object.values(filteredTags) as tags}
-							<Tags {tags} />
-						{/each}
-					</div> -->
+			<div class="pt-5">
+				<div class="border-blue my-5">
+					{#if loggedInUser}
+						<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
+					{/if}
+					<h3>Blogs:</h3>
+					<BlogsList myblog={true} data={blogs} />
+				</div>
+				<div class="col-12">
+					<div class="row d-flex">
+						<!-- <h3 class="my-4">Tags:</h3>
+						<div>
+							{#each Object.values(filteredTags) as tags}
+								<Tags {tags} />
+							{/each}
+						</div> -->
+					</div>
 				</div>
 			</div>
 		</div>

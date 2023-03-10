@@ -22,7 +22,7 @@
 	$: loggedInUser = isLoggedInUser;
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/blog">Blogs 4 you</a>
 		<button

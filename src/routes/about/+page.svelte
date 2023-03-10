@@ -1,4 +1,5 @@
 <div class="container my-5 text-center">
+	<div class="pt-5">
 	<h1>About</h1>
 	<div class ="fs-4">
 	<p >
@@ -13,4 +14,4 @@ At <strong>Blogs4You!</strong>, we believe in transparency, honesty, and authent
 
 Thank you for visiting our blog, and we hope that you'll join us on this journey of discovery and growth.
 	</p></div>
-</div>
+</div></div>

@@ -46,8 +46,9 @@
 {#if $filteredItemsArray.length > 0}
 	<FilteredItems />
 {/if}
-
+<div class="pt-5">
 {#each Object.values(blogItems) as blog, i}
+
 	<div class="card my-4">
 		<div class="card-header"><strong>{blog.title}</strong></div>
 		<div class="card-body">
@@ -65,3 +66,4 @@
 		</div>
 	</div>
 {/each}
+</div>

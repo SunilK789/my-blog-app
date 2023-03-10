@@ -38,6 +38,7 @@
 			<slot />
 		</div>
 		<div class="col-4">
+			<div class="pt-5">
 			<div class="border-blue my-4">
 				<!-- {#if loggedInUser}
 					<a class="btn btn-primary mb-4" href="/blog/addblog">Add Blog</a>
@@ -54,7 +55,7 @@
 						{/each}
 					</div>
 				</div>
-			</div>
+			</div></div>
 		</div>
 	</div>
 </div>

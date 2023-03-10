@@ -1,8 +1,13 @@
 <script>
 	import { authToken, LoggedInUser,storedBlogs, storedBlogsList } from "../store";
 	import BlogsList from "../components/BlogsList.svelte";
+  import { goto } from "$app/navigation";
 	
 	export let data = [];
+	if(data.authToken === '')
+	{
+		goto('/login');
+	}
 	const loggedInUser = data.authToken;
 	authToken.set(data.authToken);
 	storedBlogs.set(data.blogs);
@@ -35,7 +40,6 @@
 
 	storedBlogs.subscribe((value)=>{		
 			blogItems = $storedBlogsList;
-			console.log("storedBlogs.subscribe on layout.svelte: ", $storedBlogsList);
 	})
 	
 	$: blogs = $storedBlogsList;

@@ -1,24 +1,25 @@
 <script>
-	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
 	import { authToken, LoggedInUser } from "../store";
-
-	const handleLogout = ({cookies}) => {
-		if (browser) {
-			window.localStorage.clear();
-			token = window.localStorage.getItem("token");
-			authToken.set(token);
-			cookies.delete("token");
-		}
-
-		goto("/login");
-	};
-
+	
+	let isLoggedInUser = false;
+	
 	const handleBlogLinkClick = () => {
 		goto("/blog");
 	};
 
-	$: loggedInUser = $LoggedInUser;
+	authToken.subscribe((value) => {	
+		//console.log("loggedinuser from subscribe navbar - value: ", value);	
+		if (value) {
+			isLoggedInUser = true;
+			//console.log("loggedinuser from subscribe navbar isLoggedInUser: ", isLoggedInUser);
+		} else {
+			isLoggedInUser = false;
+			//console.log("loggedinuser from subscribe navbar isLoggedInUser - else: ", isLoggedInUser);
+		}
+	});
+
+	$: loggedInUser = isLoggedInUser;
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,11 +44,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/about">About</a>
 				</li>
-				<li class="nav-item">					
+				<li class="nav-item">
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
 				</li>
-				<li class="nav-item">					
+				<li class="nav-item">
 					<!-- svelte-ignore a11y-invalid-attribute -->
 					<a class="nav-link" href="/myblog">My Blogs</a>
 				</li>
@@ -65,9 +66,9 @@
 				<a class="btn btn-primary mx-2" href="/login">Login</a>
 				<a class="btn btn-primary" href="/signup">Sign Up</a>
 			{:else}
-				<button class="btn btn-primary mx-2" on:click={handleLogout}>
+				<a class="btn btn-primary mx-2" href="/logout" >
 					Logout
-				</button>
+				</a>
 			{/if}
 		</div>
 	</div>

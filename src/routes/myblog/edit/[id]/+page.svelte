@@ -4,7 +4,6 @@
   import { storedBlogs } from "../../../store";
 
 	export let data=[];
-	console.log("data from edit [id] page.svelte: ",data);
 	let title = data.blog.title;
 	let description = data.blog.description;
 	let author = data.blog.author;

@@ -2,15 +2,17 @@
 import { userLogin } from "../api/auth";
 import { redirect } from '@sveltejs/kit';
 import { authToken } from "../store";
+import { browser } from "$app/environment";
 
 /** @type {import('./$types').Actions} */
+/** @type {import('./$types').LayoutServerLoad} */
 export const actions = {
-  login: async ({ cookies, request }) => {
+  login: async ({events, cookies, request }) => {
     const data = await request.formData();
 
     const email = data.get('email');
     const password = data.get('password');
-   var token = await userLogin(email, password);
+    var token = await userLogin(email, password);
    
    cookies.set("token", token.authToken, {
 			path: "/",
@@ -22,6 +24,8 @@ export const actions = {
  
         if(token.success){
             authToken.set(token.authToken);
-           throw redirect(301, "/blog");
+            //if(browser)
+
+            throw redirect(301, "/blog");
         }
   }}

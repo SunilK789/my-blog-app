@@ -15,10 +15,6 @@
 	export let data = [];
 	let blogs = $storedBlogsList; //data.blogs;
 
-	if (browser) {
-		const token = window.localStorage.getItem("token");
-		authToken.set(token);
-	}
 	blogId.set(null);
 
 	const handleDeleteBlog = async (id) => {

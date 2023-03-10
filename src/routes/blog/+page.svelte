@@ -13,11 +13,6 @@
 	let allBlogs = data.blogs;
 	let filteredData = [];
 	let filteredDataByTag = [];
-
-	if (browser) {
-		const token = window.localStorage.getItem("token");
-		authToken.set(token);
-	}
 	blogId.set(null);
 
 	filteredItemsArray.subscribe((value) => {

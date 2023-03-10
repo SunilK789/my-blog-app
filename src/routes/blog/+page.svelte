@@ -1,10 +1,6 @@
 <script>
 	import { browser } from "$app/environment";
-	import {
-		authToken,
-		blogId,		
-		filteredItemsArray,
-	} from "../store";
+	import { authToken, blogId, filteredItemsArray } from "../store";
 	import Tags from "../components/Tags.svelte";
 	import FilteredItems from "../components/FilteredItems.svelte";
 
@@ -19,9 +15,7 @@
 		filteredData = [];
 		if ($filteredItemsArray.length === 0) {
 			blogs = allBlogs;
-			
 		} else if ($filteredItemsArray.length > 0) {
-			
 			$filteredItemsArray.forEach((element) => {
 				var PATTERN = element.tag;
 				filteredDataByTag = data.blogs.filter(function (item) {
@@ -33,7 +27,6 @@
 						filteredData.push(element);
 					}
 				});
-
 			});
 
 			blogs = filteredData;
@@ -43,27 +36,31 @@
 	$: blogItems = blogs;
 </script>
 
-{#if $filteredItemsArray.length > 0}
-	<FilteredItems />
-{/if}
 <div class="pt-5">
-{#each Object.values(blogItems) as blog, i}
+	<div class="my-5">
+		{#if $filteredItemsArray.length > 0}
+			<FilteredItems />
+		{/if}
 
-	<div class="card my-4">
-		<div class="card-header"><strong>{blog.title}</strong></div>
-		<div class="card-body">
-			<p class="card-text">
-				{#if blog.description.length > 200}
-					{[blog.description.slice(0, 200)]}...
-				{:else}
-					{blog.description}
-				{/if}
-			</p>
-			<p><small>by {blog.author}</small></p>
-			<a href="/blog/{blog._id}" class="btn btn-outline-primary btn-sm">read more...</a>
-			
-			<Tags tags={blog.tag} />
-		</div>
+		{#each Object.values(blogItems) as blog, i}
+			<div class="card my-3">
+				<div class="card-header"><strong>{blog.title}</strong></div>
+				<div class="card-body">
+					<p class="card-text">
+						{#if blog.description.length > 200}
+							{[blog.description.slice(0, 200)]}...
+						{:else}
+							{blog.description}
+						{/if}
+					</p>
+					<p><small>by {blog.author}</small></p>
+					<a href="/blog/{blog._id}" class="btn btn-outline-primary btn-sm">
+						read more...
+					</a>
+
+					<Tags tags={blog.tag} />
+				</div>
+			</div>
+		{/each}
 	</div>
-{/each}
 </div>

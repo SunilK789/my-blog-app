@@ -18,8 +18,6 @@ export const getAllBlogs = async () => {
 };
 export const getAllBlogsByUser = async (token) => {
 	const fullApiPath = `${url}/api/blog/getuserblogs`;
-	console.log("authToken api: ",token);
-	
 	const response = await fetch(fullApiPath, {
 		method: "GET", // *GET, POST, PUT, DELETE, etc.
 		headers: {

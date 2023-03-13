@@ -15,10 +15,7 @@
 
 	const handleDeleteBlog = async (id) => {
 		const res = await deleteBlogById(id, data.token);
-		console.log("blogs before delete: ", blogs);
 		const blogsAfterDelete = blogs.filter((blog) => blog._id !== id);
-
-		console.log("blogsAfterDelete: ", blogsAfterDelete);
 
 		storedBlogs.set(blogsAfterDelete);
 		goto(`/myblog`);

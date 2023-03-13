@@ -27,4 +27,7 @@
 		background-color: #3a3d40;
 		color: #bfc2c7;
 	}
+	:global(body.dark-mode) div :global(.list-group-item):hover {
+		color: rgb(112, 196, 34);	
+	}
 </style>

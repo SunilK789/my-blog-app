@@ -6,21 +6,18 @@
 	let isLoggedInUser = false;
 
 	const handleModes = () => {
-		
 		if ($currentMode === "undefined") {
 			mode.set("dark");
-			console.log("current mode: ",$currentMode)
-		} else if ($currentMode === "dark"){
+			console.log("current mode: ", $currentMode);
+		} else if ($currentMode === "dark") {
 			mode.set("light");
-			console.log("current mode: ",$currentMode)
-		}else{
+			console.log("current mode: ", $currentMode);
+		} else {
 			mode.set("dark");
-			console.log("current mode: ",$currentMode)
+			console.log("current mode: ", $currentMode);
 		}
 
-		window.document.body.classList.toggle('dark-mode');
-		
-
+		window.document.body.classList.toggle("dark-mode");
 	};
 	const handleBlogLinkClick = () => {
 		goto("/blog");
@@ -35,12 +32,12 @@
 	});
 
 	$: loggedInUser = isLoggedInUser;
-	$: setMode = $currentMode === "dark"? "Light": "Dark";
+	$: setMode = $currentMode === "dark" ? "Light" : "Dark";
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-{$currentMode} fixed-top">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/blog">Blogs 4 you</a>
+		<b><a class="navbar-brand" href="/blog">Blogs 4 you</a></b>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -58,16 +55,18 @@
 					<a class="nav-link active" aria-current="page" href="/">Home</a>
 				</li> -->
 				<li class="nav-item">
-					<a class="nav-link" href="/about">About</a>
+					<b><a class="nav-link" href="/about">About</a></b>
 				</li>
 				<li class="nav-item">
 					<!-- svelte-ignore a11y-invalid-attribute -->
-					<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
+					<b>
+						<a class="nav-link" href="#" on:click={handleBlogLinkClick}>Blog</a>
+					</b>
 				</li>
 				{#if loggedInUser}
 					<li class="nav-item">
 						<!-- svelte-ignore a11y-invalid-attribute -->
-						<a class="nav-link" href="/myblog">My Blogs</a>
+						<b><a class="nav-link" href="/myblog">My Blogs</a></b>
 					</li>
 				{/if}
 			</ul>
@@ -92,7 +91,6 @@
 					type="checkbox"
 					role="switch"
 					id="flexSwitchCheckDefault"
-					
 					on:click={handleModes}
 				/>
 				<label class="form-check-label" for="flexSwitchCheckDefault">
@@ -102,24 +100,29 @@
 		</div>
 	</div>
 </nav>
-<style>	
-	:global(body.dark-mode) button {
-		background-color: #0084f6;
-		color: white;
+
+<style>
+	:global(body) {
+		background-color: #e9ecef;
 	}
-	:global(body.dark-mode) a {		
-		color: white;
-	}
-	
-	:global(body.dark-mode) ul li a {		
-		color: white;
-	}
-	
 	:global(body.dark-mode) {
 		background-color: #1d3040;
 		color: #bfc2c7;
 	}
-	:global(body) {
-		background-color: #e9ecef;
+	:global(body.dark-mode) button {
+		background-color: #0084f6;
+		color: white;
+	}
+	:global(body.dark-mode) a {
+		color: white;
+	}
+	:global(body.dark-mode) a:hover {
+		color: rgb(112, 196, 34);	
+	}
+	:global(body.dark-mode) ul li a {
+		color: white;		
+	}
+	:global(body.dark-mode) ul li a:hover {
+		color: rgb(112, 196, 34);		
 	}
 </style>

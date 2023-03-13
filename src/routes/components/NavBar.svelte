@@ -2,6 +2,28 @@
 	import { goto } from "$app/navigation";
 	import { authToken, LoggedInUser } from "../store";
 	import { mode, currentMode } from "$lib/stores/modeStore";
+	import NProgress from "nprogress";
+	import { navigating } from "$app/stores";
+	// NProgress css
+	import "nprogress/nprogress.css";
+	import { Jumper, Circle3 } from "svelte-loading-spinners";
+	let color = "#FF3E00";
+	let size = "60";
+	let unit = "px";
+
+	NProgress.configure({
+		// Full list: https://github.com/rstacruz/nprogress#configuration
+		minimum: 0.16,
+	});
+
+	$: {
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+		}
+	}
 
 	let isLoggedInUser = false;
 
@@ -77,7 +99,9 @@
 					placeholder="Search"
 					aria-label="Search"
 				/>
-				<button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+				<button class="btn btn-outline-success btn-sm" type="submit">
+					Search
+				</button>
 			</form>
 			{#if !loggedInUser}
 				<a class="btn btn-primary btn-sm mx-2" href="/login">Login</a>
@@ -101,6 +125,21 @@
 	</div>
 </nav>
 
+{#if $navigating}
+	<div class="container my-5 text-center">
+		<div class="spinner-item" title="Circle3">
+			<Circle3
+				{size}
+				{unit}
+				ballTopLeft="#FF3E00"
+				ballTopRight="#F8B334"
+				ballBottomLeft="#40B3FF"
+				ballBottomRight="#676778"
+			/>
+		</div>
+	</div>
+{/if}
+
 <style>
 	:global(body) {
 		background-color: #e9ecef;
@@ -117,12 +156,18 @@
 		color: white;
 	}
 	:global(body.dark-mode) a:hover {
-		color: rgb(112, 196, 34);	
+		color: rgb(112, 196, 34);
 	}
 	:global(body.dark-mode) ul li a {
-		color: white;		
+		color: white;
 	}
 	:global(body.dark-mode) ul li a:hover {
-		color: rgb(112, 196, 34);		
+		color: rgb(112, 196, 34);
+	}
+	.spinner-item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
 	}
 </style>

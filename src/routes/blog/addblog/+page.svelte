@@ -90,3 +90,10 @@
 		</div>
 	</form></div></div>
 </div>
+
+<style>	
+	:global(body.dark-mode) div :global(.form-control) {
+		background-color: #3a3d40;
+		color: #fff;
+	}
+</style>

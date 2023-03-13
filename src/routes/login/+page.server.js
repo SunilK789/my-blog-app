@@ -7,7 +7,7 @@ import { browser } from "$app/environment";
 /** @type {import('./$types').Actions} */
 /** @type {import('./$types').LayoutServerLoad} */
 export const actions = {
-  login: async ({events, cookies, request }) => {
+  login: async ({ cookies, request }) => {
     const data = await request.formData();
 
     const email = data.get('email');
@@ -24,8 +24,6 @@ export const actions = {
  
         if(token.success){
             authToken.set(token.authToken);
-            //if(browser)
-
             throw redirect(301, "/blog");
         }
   }}

@@ -77,7 +77,7 @@
 					placeholder="Search"
 					aria-label="Search"
 				/>
-				<button class="btn btn-outline-success" type="submit">Search</button>
+				<button class="btn btn-outline-success btn-sm" type="submit">Search</button>
 			</form>
 			{#if !loggedInUser}
 				<a class="btn btn-primary btn-sm mx-2" href="/login">Login</a>

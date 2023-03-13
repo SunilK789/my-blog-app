@@ -17,23 +17,25 @@
 			mode.set("dark");
 			console.log("current mode: ",$currentMode)
 		}
+
+		window.document.body.classList.toggle('dark-mode');
+		
+
 	};
 	const handleBlogLinkClick = () => {
 		goto("/blog");
 	};
 
 	authToken.subscribe((value) => {
-		//console.log("loggedinuser from subscribe navbar - value: ", value);
 		if (value) {
 			isLoggedInUser = true;
-			//console.log("loggedinuser from subscribe navbar isLoggedInUser: ", isLoggedInUser);
 		} else {
 			isLoggedInUser = false;
-			//console.log("loggedinuser from subscribe navbar isLoggedInUser - else: ", isLoggedInUser);
 		}
 	});
 
 	$: loggedInUser = isLoggedInUser;
+	$: setMode = $currentMode === "dark"? "Light": "Dark";
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-{$currentMode} fixed-top">
@@ -94,9 +96,30 @@
 					on:click={handleModes}
 				/>
 				<label class="form-check-label" for="flexSwitchCheckDefault">
-					Modes(Light/Dark)
+					Enable {setMode} Mode
 				</label>
 			</div>
 		</div>
 	</div>
 </nav>
+<style>	
+	:global(body.dark-mode) button {
+		background-color: #0084f6;
+		color: white;
+	}
+	:global(body.dark-mode) a {		
+		color: white;
+	}
+	
+	:global(body.dark-mode) ul li a {		
+		color: white;
+	}
+	
+	:global(body.dark-mode) {
+		background-color: #1d3040;
+		color: #bfc2c7;
+	}
+	:global(body) {
+		background-color: #e9ecef;
+	}
+</style>

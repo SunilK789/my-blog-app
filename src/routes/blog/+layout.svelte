@@ -33,7 +33,7 @@
 	}	
 </script>
 
-<div class="container bg-{$currentMode}">
+<div class="container">
 	<div class="row">
 		<div class="col-8">
 			<slot />

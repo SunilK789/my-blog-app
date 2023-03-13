@@ -70,3 +70,9 @@
 		</div>
 	</div>
 </div>
+<style>	
+	:global(body.dark-mode) div :global(.card) {
+		background-color: #3a3d40;
+		color: #bfc2c7;
+	}
+</style>

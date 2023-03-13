@@ -17,7 +17,7 @@
 <div class="container">
 	<div class="my-3">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i class="fa-solid fa-circle-arrow-left" on:click={handleBackButton} />
+		<i role="button" class="fa-solid fa-circle-arrow-left" on:click={handleBackButton} />
 	</div>
 	<div class="text-center fs-1"><strong>{data.blog.title}</strong></div>
 	<div class="card my-3">
@@ -34,9 +34,10 @@
 </div></div>
 </div>
 
-<style>
-	i {
-		cursor: pointer;
-		width: 100px;
+
+<style>	
+	:global(body.dark-mode) div :global(.card) {
+		background-color: #3a3d40;
+		color: #bfc2c7;
 	}
 </style>

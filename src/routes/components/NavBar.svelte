@@ -7,8 +7,9 @@
 	// NProgress css
 	import "nprogress/nprogress.css";
 	import { Jumper, Circle3 } from "svelte-loading-spinners";
+  import Alert from "./Alert.svelte";
 	let color = "#FF3E00";
-	let size = "60";
+	let size = "40";
 	let unit = "px";
 
 	NProgress.configure({
@@ -54,12 +55,12 @@
 	});
 
 	$: loggedInUser = isLoggedInUser;
-	$: setMode = $currentMode === "dark" ? "Light" : "Dark";
+	$: setMode =  $currentMode === "dark" ? "Light" : "Dark";
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-{$currentMode} fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
 	<div class="container-fluid">
-		<b><a class="navbar-brand" href="/blog">Blogs 4 you</a></b>
+		<b><a class="navbar-brand" href="/blog">Blogs4you</a></b>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -107,7 +108,7 @@
 				<a class="btn btn-primary btn-sm mx-2" href="/login">Login</a>
 				<a class="btn btn-primary btn-sm" href="/signup">Sign Up</a>
 			{:else}
-				<a class="btn btn-primary mx-2" href="/logout">Logout</a>
+				<a class="btn btn-primary mx-2 btn-sm" href="/logout">Logout</a>
 			{/if}
 			<div class="form-check form-switch mx-2">
 				<input
@@ -124,9 +125,9 @@
 		</div>
 	</div>
 </nav>
-
+<Alert></Alert>
 {#if $navigating}
-	<div class="container my-5 text-center">
+	<div class="container my-5 mt-5 text-center">
 		<div class="spinner-item" title="Circle3">
 			<Circle3
 				{size}
@@ -163,6 +164,17 @@
 	}
 	:global(body.dark-mode) ul li a:hover {
 		color: rgb(112, 196, 34);
+	}
+	:global(body) nav {
+		background-color: hsl(210, 69%, 85%);
+		color: #000308;
+	}
+	:global(body) nav:hover {
+		color: rgb(112, 196, 34);
+	}
+	:global(body.dark-mode) nav {
+		background-color: #3a3d40;
+		color: #bfc2c7;
 	}
 	.spinner-item {
 		display: flex;

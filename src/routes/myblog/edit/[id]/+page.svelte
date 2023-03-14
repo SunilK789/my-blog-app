@@ -1,9 +1,14 @@
 <script>
-  import { goto } from "$app/navigation";
+	import { goto } from "$app/navigation";
 	import { editBlogById } from "../../../api/services";
-  import { storedBlogs } from "../../../store";
+	import { storedBlogs } from "../../../store";
+	import {
+		alertType,
+		setVisibleAlert,
+		setAlertMessage,
+	} from "$lib/stores/alertStore";
 
-	export let data=[];
+	export let data = [];
 	let title = data.blog.title;
 	let description = data.blog.description;
 	let author = data.blog.author;
@@ -20,25 +25,30 @@
 	const handleSaveButton = async () => {
 		const token = data.token;
 
-		const res = await editBlogById(id, title, description, author,tag, token);
-		console.log("res after update: ",res);
+		const res = await editBlogById(id, title, description, author, tag, token);
+		console.log("res after update: ", res);
 		if (res.success) {
-
 			let blogs = $storedBlogs;
 			for (let index = 0; index < blogs.length; index++) {
-				if(blogs[index]._id === res.blog._id)
-				{
-
-					blogs[index].title = res.blog.title,
-					blogs[index].description = res.blog.description,
-					blogs[index].tag = res.blog.tag,
-					blogs[index].author = res.blog.author
+				if (blogs[index]._id === res.blog._id) {
+					(blogs[index].title = res.blog.title),
+						(blogs[index].description = res.blog.description),
+						(blogs[index].tag = res.blog.tag),
+						(blogs[index].author = res.blog.author);
 					break;
 				}
-				
 			}
 			storedBlogs.set(blogs);
-			goto(`/myblog/${id}`)
+
+			alertType.set("success");
+			setVisibleAlert.set(true);
+			setAlertMessage.set("Blog updated!");
+
+			setTimeout(() => {
+				setVisibleAlert.set(false);
+			}, 3000);
+
+			goto(`/myblog/${id}`);
 		}
 	};
 </script>
@@ -107,7 +117,8 @@
 		</div>
 	</div>
 </div>
-<style>	
+
+<style>
 	:global(body.dark-mode) div :global(.form-control) {
 		background-color: #3a3d40;
 		color: #fff;

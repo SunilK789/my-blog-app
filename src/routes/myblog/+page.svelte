@@ -11,6 +11,11 @@
 	import FilteredItems from "../components/FilteredItems.svelte";
 	import { deleteBlogById } from "../api/services";
 	import { goto } from "$app/navigation";
+		import {
+		alertType,
+		setVisibleAlert,
+		setAlertMessage,
+	} from "$lib/stores/alertStore";
 
 	export let data = [];
 	let blogs = $storedBlogsList; //data.blogs;
@@ -23,6 +28,14 @@
 			const blogsAfterDelete = blogs.filter((blog) => blog._id !== id);
 			storedBlogs.set(blogsAfterDelete);
 			blogs = $storedBlogsList;
+
+			alertType.set("danger");
+			setVisibleAlert.set(true);
+			setAlertMessage.set("Blog deleted successfully!");
+			
+			setTimeout(() => {
+				setVisibleAlert.set(false);
+			}, 3000);
 		} else {
 			alert(res.message);
 		}

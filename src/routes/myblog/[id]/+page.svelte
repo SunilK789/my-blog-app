@@ -3,7 +3,13 @@
 	import { page } from "$app/stores";
 	import { deleteBlogById } from "../../api/services";
 	import { blogId, storedBlogs, storedBlogsList } from "../../store";
+	import {
+		alertType,
+		setVisibleAlert,
+		setAlertMessage,
+	} from "$lib/stores/alertStore";
 
+	
 	blogId.set($page.params.id);
 
 	export let data;
@@ -15,10 +21,19 @@
 
 	const handleDeleteBlog = async (id) => {
 		const res = await deleteBlogById(id, data.token);
-		const blogsAfterDelete = blogs.filter((blog) => blog._id !== id);
+		if(res.success){
+			const blogsAfterDelete = blogs.filter((blog) => blog._id !== id);
 
-		storedBlogs.set(blogsAfterDelete);
-		goto(`/myblog`);
+			storedBlogs.set(blogsAfterDelete);
+			alertType.set("danger");
+				setVisibleAlert.set(true);
+				setAlertMessage.set("Blog deleted successfully!");
+				
+				setTimeout(() => {
+					setVisibleAlert.set(false);
+				}, 3000);
+			goto(`/myblog`);
+		}
 	};
 	const handleEditBlog = async (id) => {
 		goto(`/myblog/edit/${id}`);

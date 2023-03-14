@@ -4,6 +4,7 @@
 	import { browser } from "$app/environment";
 	import BlogsList from "../components/BlogsList.svelte";
 	import { mode, currentMode } from "$lib/stores/modeStore";
+	import { fade, fly } from "svelte/transition";
 	
 	export let data = [];
 	const loggedInUser = data.authToken;
@@ -33,7 +34,7 @@
 	}	
 </script>
 
-<div class="container">
+<div class="container" in:fly={{ y: -100, duration: 1000 }}>
 	<div class="row">
 		<div class="col-8">
 			<slot />

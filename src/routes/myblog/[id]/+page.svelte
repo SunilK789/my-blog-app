@@ -8,8 +8,8 @@
 		setVisibleAlert,
 		setAlertMessage,
 	} from "$lib/stores/alertStore";
+import { fade, fly  } from 'svelte/transition';
 
-	
 	blogId.set($page.params.id);
 
 	export let data;
@@ -40,7 +40,7 @@
 	};
 </script>
 
-<div class="container">
+<div class="container" in:fade>
 	<div class="pt-5">
 		<div class="my-5">
 			<!-- svelte-ignore a11y-click-events-have-key-events -->

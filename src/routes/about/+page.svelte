@@ -1,4 +1,8 @@
-<div class="container my-5 text-center">
+<script>
+	import { fade, fly } from "svelte/transition";
+</script>
+
+<div class="container my-5 text-center" in:fly="{{ y: -100, duration: 1000 }}">
 	<div class="pt-5">
 	<h1>About</h1>
 	<div class ="fs-4">

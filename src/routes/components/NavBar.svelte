@@ -8,6 +8,8 @@
 	import "nprogress/nprogress.css";
 	import { Jumper, Circle3 } from "svelte-loading-spinners";
   import Alert from "./Alert.svelte";
+  import { fade } from 'svelte/transition';
+  
 	let color = "#FF3E00";
 	let size = "40";
 	let unit = "px";

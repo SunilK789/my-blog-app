@@ -11,11 +11,12 @@
 	import FilteredItems from "../components/FilteredItems.svelte";
 	import { deleteBlogById } from "../api/services";
 	import { goto } from "$app/navigation";
-		import {
+	import {
 		alertType,
 		setVisibleAlert,
 		setAlertMessage,
 	} from "$lib/stores/alertStore";
+	import { fade, fly } from "svelte/transition";
 
 	export let data = [];
 	let blogs = $storedBlogsList; //data.blogs;
@@ -32,7 +33,7 @@
 			alertType.set("danger");
 			setVisibleAlert.set(true);
 			setAlertMessage.set("Blog deleted successfully!");
-			
+
 			setTimeout(() => {
 				setVisibleAlert.set(false);
 			}, 3000);
@@ -50,7 +51,7 @@
 {#if $filteredItemsArray.length > 0}
 	<FilteredItems />
 {/if}
-<div class="pt-5">
+<div class="pt-5" in:fly={{ y: -100, duration: 1000 }}>
 	<div class="my-5">
 		{#each Object.values(blogItems) as blog, i}
 			<div class="card my-3">
@@ -93,7 +94,8 @@
 		{/each}
 	</div>
 </div>
-<style>	
+
+<style>
 	:global(body.dark-mode) div :global(.card) {
 		/* this will apply to all <strong> elements, in any
 			 component, that are inside <div> elements belonging

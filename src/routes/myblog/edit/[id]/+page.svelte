@@ -7,6 +7,7 @@
 		setVisibleAlert,
 		setAlertMessage,
 	} from "$lib/stores/alertStore";
+	import { fade, fly  } from 'svelte/transition';
 
 	export let data = [];
 	let title = data.blog.title;
@@ -42,7 +43,7 @@
 
 			alertType.set("success");
 			setVisibleAlert.set(true);
-			setAlertMessage.set("Blog updated!");
+			setAlertMessage.set("Blog updated successfully!");
 
 			setTimeout(() => {
 				setVisibleAlert.set(false);
@@ -53,7 +54,7 @@
 	};
 </script>
 
-<div class="container">
+<div class="container" transition:fade>
 	<div class="pt-5">
 		<div class="my-5">
 			<form type="submit">

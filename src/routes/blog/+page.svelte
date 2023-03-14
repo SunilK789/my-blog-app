@@ -1,9 +1,7 @@
 <script>
-	
 	import { blogId, filteredItemsArray } from "../store";
 	import Tags from "../components/Tags.svelte";
 	import FilteredItems from "../components/FilteredItems.svelte";
-
 	export let data;
 	let blogs = data.blogs;
 	let allBlogs = data.blogs;
@@ -64,7 +62,8 @@
 		{/each}
 	</div>
 </div>
-<style>	
+
+<style>
 	:global(body.dark-mode) div :global(.card) {
 		/* this will apply to all <strong> elements, in any
 			 component, that are inside <div> elements belonging

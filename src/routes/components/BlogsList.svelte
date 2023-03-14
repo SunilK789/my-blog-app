@@ -1,6 +1,6 @@
 <script>
 	import { blogId, currentBlogId } from "../store";
-
+import { fade, fly } from "svelte/transition";
 	export let data;
 	export let myblog;
 

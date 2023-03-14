@@ -2,7 +2,7 @@
 	import { authToken, LoggedInUser,storedBlogs, storedBlogsList } from "../store";
 	import BlogsList from "../components/BlogsList.svelte";
   import { goto } from "$app/navigation";
-	
+	import { fade, fly } from "svelte/transition";
 	export let data = [];
 	if(data.authToken === '')
 	{
@@ -45,7 +45,7 @@
 	$: blogs = $storedBlogsList;
 </script>
 
-<div class="container">
+<div class="container" in:fly="{{ y: -100, duration: 1000 }}">
 	<div class="row">
 		<div class="col-8">
 			<slot />
